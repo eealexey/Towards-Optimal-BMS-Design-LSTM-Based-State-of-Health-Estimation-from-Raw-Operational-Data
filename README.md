@@ -1,0 +1,1 @@
+# Towards-Optimal-BMS-Design-LSTM-Based-State-of-Health-Estimation-from-Raw-Operational-Data
