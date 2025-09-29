@@ -6,14 +6,18 @@ This repository contains the implementation of experiments on SoH prediction usi
 
 In addition to raw BMS data, we also tested features derived from **Incremental Capacity Analysis (ICA)**. ICA is a common diagnostic technique where the derivative of capacity with respect to voltage (dQ/dV) is analyzed to extract degradation-sensitive features such as peak value, peak position, and area under the curve.
 
-
 #### ICA example:
 
 ![ICA example](images/ica_example.png)
 
-We compare two machine learning models:
-- **Gradient Boosting Trees (GBT)**
-- **Long Short-Term Memory (LSTM) networks**
+## Methods  
+We evaluated two main machine learning models:  
+- **Gradient Boosting Trees (GBT):** applied both to raw flattened time-series data and to ICA features.  
+- **Long Short-Term Memory networks (LSTM):** applied directly to sequential raw BMS data.  
+
+We also tested hybrid approaches:  
+- **GBT on hidden states from LSTM** (using the LSTM memory representations as features)  
+- **GBT on ICA features combined with LSTM outputs**
 
 #### LSTM network
 
@@ -23,13 +27,16 @@ We compare two machine learning models:
 ### Results
 - **LSTM on raw BMS data** achieved the best accuracy with **RMSE = 1.27**, clearly outperforming all other approaches.  
 - Adding ICA features to LSTM degraded performance (**RMSE = 1.71**).  
-- GBT on ICA features performed moderately (**RMSE = 2.78**), but all GBT-based approaches lagged behind LSTM.  
+- **GBT on raw flattened BMS data** gave poor accuracy (**RMSE = 3.40**) due to the loss of temporal structure.  
+- **GBT on ICA features** performed moderately (**RMSE = 2.78**).  
+- **GBT on hidden states from LSTM** (using memory representations as features) resulted in **RMSE = 3.36**.  
+- **GBT on hidden states + ICA features** slightly improved to **RMSE = 2.71**, but still lagged far behind LSTM.  
 - Combining raw data with ICA or hybrid GBT+LSTM methods did not yield improvements, often worsening results.  
 
+## Conclusions
+ LSTM directly applied to raw BMS data provides the most reliable and accurate SoH estimation. ICA features and hybrid approaches do not add value for this task.
 
 ---
 
-##  References
+## References
 - Dataset: [NASA Prognostics Data Repository](https://ti.arc.nasa.gov/tech/dash/groups/pcoe/prognostic-data-repository/#battery$0)  
-
-
