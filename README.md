@@ -39,4 +39,4 @@ We also tested hybrid approaches:
 ---
 
 ## References
-- Dataset: [NASA Prognostics Data Repository](https://ti.arc.nasa.gov/tech/dash/groups/pcoe/prognostic-data-repository/#battery$0)  
+- Dataset: [Dataset on Kaggle](https://www.kaggle.com/datasets/patrickfleith/nasa-battery-dataset)  
